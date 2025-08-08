@@ -13,10 +13,11 @@ namespace BankAccount.Test
             dateProvider = new DateProvider();
 
             sut = new BankAccount(dateProvider);
-
         }
 
+
         [Fact]
+
         public void Balance_is_zero_upon_account_creation()
         {
             var sut = new BankAccount(dateProvider);
@@ -36,7 +37,15 @@ namespace BankAccount.Test
         }
 
         [Fact]
-        public void Withdrawal_fails_if_balance_is_insufficient()
+        public void Throws_when_negative_amount_is_passed()
+        {
+            var action = () => sut.Deposit(-100);
+
+            action.Should().Throw<ArgumentOutOfRangeException>("Negative amounts are not allowed.");
+        }
+
+        [Fact]
+        public void Throws_When_balance_is_insufficient()
         {
             sut.Deposit(100);
 
@@ -63,6 +72,7 @@ namespace BankAccount.Test
             sut.Statements.Should().BeEmpty();
         }
 
+
         [Fact]
         public void Registers_a_statement_after_operation()
         {
@@ -72,9 +82,8 @@ namespace BankAccount.Test
         }
 
         [Fact]
-        public void Does_not_register_a_statement_for_failed_operation()
+        public void Statement_is_not_register_for_failed_operation()
         {
-
             try
             {
                 sut.Withdraw(100);
@@ -83,7 +92,6 @@ namespace BankAccount.Test
             catch (ArgumentException) { }
 
             sut.Statements.Should().BeEmpty();
-
         }
 
         [Fact]

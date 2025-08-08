@@ -8,19 +8,33 @@
         private readonly List<Statement> _statements = [];
         public IEnumerable<Statement> Statements => _statements;
 
-        //public IDateProvider DateProvider { get; } = dateProvider;
-
         public double GetBalance()
         {
             return balance;
         }
+
         public void Deposit(double amount)
         {
+            VerifyAmountIsPosivtive(amount);
+
             balance += amount;
 
             AddStatmentToHistory(amount);
 
         }
+
+        private static void VerifyAmountIsPosivtive(double amount)
+        {
+            if (amount < 0)
+            {
+                throw new ArgumentOutOfRangeException("Negative amounts are not allowed.");
+            }
+            else
+            {
+                return;
+            }
+        }
+
         public void Withdraw(double amount)
         {
             if (amount > balance)
@@ -36,7 +50,7 @@
 
         private void AddStatmentToHistory(double amount)
         {
-            Statement statement = new(amount, dateProvider.Today, balance);
+            var statement = new Statement(amount, dateProvider.Today, balance);
 
             _statements.Add(statement);
         }
