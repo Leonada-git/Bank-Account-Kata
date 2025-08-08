@@ -36,7 +36,7 @@
         {
             var operationDate = clock.Now;
 
-            Statement statement = new(operationDate, amount, balance);
+            Statement statement = new(amount, operationDate, balance);
 
             _statements.Add(statement);
         }

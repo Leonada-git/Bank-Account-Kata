@@ -91,32 +91,13 @@ namespace BankAccount.Test
         }
 
         [Fact]
-        public void Amount_is_registered_in_history()
+        public void Statement_is_registered_in_history()
         {
             sut.Deposit(100);
+            var statement = new Statement(100, clock.Now, sut.GetBalance());
 
-            Statement Statment = sut.Statements.Single();
-            Statment.Amount.Should().Be(100);
+            sut.Statements.Single().Should().Be(statement);
         }
 
-        [Fact]
-        public void Balance_is_registered_in_history()
-        {
-            sut.Deposit(100);
-
-            Statement Statment = sut.Statements.Single();
-            Statment.Balance.Should().Be(100);
-        }
-
-        [Fact]
-        public void Date_is_registered_in_history()
-        {
-            var operationDate = clock.Now;
-
-            sut.Deposit(100);
-
-            Statement Statment = sut.Statements.Single();
-            Statment.OperationDate.Should().Be(operationDate);
-        }
     }
 }

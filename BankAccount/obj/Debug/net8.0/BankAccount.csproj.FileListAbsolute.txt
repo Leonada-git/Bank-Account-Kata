@@ -19,3 +19,4 @@ D:\Sana_Soft\TDD\TDDWithBankAccount\BankAccount\obj\Debug\net8.0\refint\BankAcco
 D:\Sana_Soft\TDD\TDDWithBankAccount\BankAccount\obj\Debug\net8.0\BankAccount.pdb
 D:\Sana_Soft\TDD\TDDWithBankAccount\BankAccount\obj\Debug\net8.0\BankAccount.genruntimeconfig.cache
 D:\Sana_Soft\TDD\TDDWithBankAccount\BankAccount\obj\Debug\net8.0\ref\BankAccount.dll
+D:\Sana_Soft\TDD\TDDWithBankAccount\BankAccount\obj\Debug\net8.0\BankAccount.sourcelink.json

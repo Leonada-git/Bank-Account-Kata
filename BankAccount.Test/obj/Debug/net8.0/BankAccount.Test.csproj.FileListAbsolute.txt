@@ -122,3 +122,4 @@ D:\Sana_Soft\TDD\TDDWithBankAccount\BankAccount.Test\obj\Debug\net8.0\refint\Ban
 D:\Sana_Soft\TDD\TDDWithBankAccount\BankAccount.Test\obj\Debug\net8.0\BankAccount.Test.pdb
 D:\Sana_Soft\TDD\TDDWithBankAccount\BankAccount.Test\obj\Debug\net8.0\BankAccount.Test.genruntimeconfig.cache
 D:\Sana_Soft\TDD\TDDWithBankAccount\BankAccount.Test\obj\Debug\net8.0\ref\BankAccount.Test.dll
+D:\Sana_Soft\TDD\TDDWithBankAccount\BankAccount.Test\obj\Debug\net8.0\BankAccount.Test.sourcelink.json
