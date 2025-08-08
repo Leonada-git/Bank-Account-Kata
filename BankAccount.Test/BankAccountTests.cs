@@ -104,7 +104,7 @@ namespace BankAccount.Test
     }
 }
 
-file class DateProvider : IDateProvider
+public class DateProvider : IDateProvider
 {
     public DateOnly Today { get; set; }
 }
