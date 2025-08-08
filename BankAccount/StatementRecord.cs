@@ -1,4 +1,4 @@
 ﻿namespace BankAccount
 {
-    public record Statement(double Amount, DateTime OperationDate, double Balance);
+    public record Statement(double Amount, DateOnly OperationDate, double Balance);
 }

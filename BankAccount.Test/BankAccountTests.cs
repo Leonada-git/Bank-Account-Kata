@@ -1,27 +1,25 @@
-﻿using FluentAssertions;
+﻿using BankAccount;
+using FluentAssertions;
 
 namespace BankAccount.Test
 {
     public class BankAccountTests
     {
         private readonly BankAccount sut;
-        private readonly Clock clock;
+        private readonly DateProvider dateProvider;
 
         public BankAccountTests()
         {
-            clock = new Clock
-            {
-                Now = DateTime.Now,
-            };
+            dateProvider = new DateProvider();
 
-            sut = new BankAccount(clock);
+            sut = new BankAccount(dateProvider);
 
         }
 
         [Fact]
         public void Balance_is_zero_upon_account_creation()
         {
-            var sut = new BankAccount(clock);
+            var sut = new BankAccount(dateProvider);
 
             var balance = sut.GetBalance();
 
@@ -68,9 +66,7 @@ namespace BankAccount.Test
         [Fact]
         public void Registers_a_statement_after_operation()
         {
-            const double amount = 100;
-
-            sut.Deposit(amount);
+            sut.Deposit(100);
 
             sut.Statements.Should().ContainSingle();
         }
@@ -93,11 +89,22 @@ namespace BankAccount.Test
         [Fact]
         public void Statement_is_registered_in_history()
         {
-            sut.Deposit(100);
-            var statement = new Statement(100, clock.Now, sut.GetBalance());
+            GivenTodayIs(new(2023, 8, 5));
 
+            sut.Deposit(100);
+
+            var statement = new Statement(Amount: 100, OperationDate: new(2023, 8, 5), Balance: 100);
             sut.Statements.Single().Should().Be(statement);
         }
 
+        private void GivenTodayIs(DateOnly dateOnly)
+        {
+            dateProvider.Today = dateOnly;
+        }
     }
+}
+
+file class DateProvider : IDateProvider
+{
+    public DateOnly Today { get; set; }
 }

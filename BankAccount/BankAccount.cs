@@ -1,12 +1,14 @@
 ﻿namespace BankAccount
 {
-    public class BankAccount(IClock clock) : IBankAccount
+    public class BankAccount(IDateProvider dateProvider) : IBankAccount
     {
         private double balance = 0;
-        private readonly IClock clock = clock ?? throw new ArgumentNullException(nameof(clock));
+        private readonly IDateProvider dateProvider = dateProvider ?? throw new ArgumentNullException(nameof(dateProvider));
 
         private readonly List<Statement> _statements = [];
         public IEnumerable<Statement> Statements => _statements;
+
+        //public IDateProvider DateProvider { get; } = dateProvider;
 
         public double GetBalance()
         {
@@ -34,9 +36,7 @@
 
         private void AddStatmentToHistory(double amount)
         {
-            var operationDate = clock.Now;
-
-            Statement statement = new(amount, operationDate, balance);
+            Statement statement = new(amount, dateProvider.Today, balance);
 
             _statements.Add(statement);
         }
