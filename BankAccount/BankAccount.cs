@@ -44,7 +44,7 @@
             else
             {
                 balance -= amount;
-                AddStatmentToHistory(amount);
+                AddStatmentToHistory(-amount);
             }
         }
 

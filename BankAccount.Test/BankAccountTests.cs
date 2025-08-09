@@ -6,7 +6,7 @@ namespace BankAccount.Test
     public class BankAccountTests
     {
         private readonly BankAccount sut;
-        private readonly DateProvider dateProvider;
+        private readonly IDateProvider dateProvider;
 
         public BankAccountTests()
         {
@@ -107,12 +107,12 @@ namespace BankAccount.Test
 
         private void GivenTodayIs(DateOnly dateOnly)
         {
-            dateProvider.Today = dateOnly;
+            ((DateProvider)dateProvider).Today = dateOnly;
         }
     }
 }
 
 public class DateProvider : IDateProvider
 {
-    public DateOnly Today { get; set; }
+    public DateOnly Today { get; set; } = new();
 }
