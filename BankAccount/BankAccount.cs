@@ -2,7 +2,7 @@
 {
     public class BankAccount(IDateProvider dateProvider) : IBankAccount
     {
-        private double balance = 0;
+        private int balance = 0;
         private readonly IDateProvider dateProvider = dateProvider ?? throw new ArgumentNullException(nameof(dateProvider));
 
         private readonly List<Statement> _statements = [];
@@ -13,9 +13,9 @@
             return balance;
         }
 
-        public void Deposit(double amount)
+        public void Deposit(int amount)
         {
-            VerifyAmountIsPosivtive(amount);
+            EnsureIsPosivtive(amount);
 
             balance += amount;
 
@@ -23,11 +23,11 @@
 
         }
 
-        private static void VerifyAmountIsPosivtive(double amount)
+        private static void EnsureIsPosivtive(double amount)
         {
             if (amount < 0)
             {
-                throw new ArgumentOutOfRangeException("Negative amounts are not allowed.");
+                throw new ArgumentException("Negative amounts are not allowed.");
             }
             else
             {
@@ -35,16 +35,19 @@
             }
         }
 
-        public void Withdraw(double amount)
+        public void Withdraw(int amount)
+        {
+            EnsureIsPosivtive(amount);
+            EnsureSufficientBalance(amount);
+            balance -= amount;
+            AddStatmentToHistory(-amount);
+        }
+
+        private void EnsureSufficientBalance(double amount)
         {
             if (amount > balance)
             {
                 throw new ArgumentException("Balance is insufficient.");
-            }
-            else
-            {
-                balance -= amount;
-                AddStatmentToHistory(-amount);
             }
         }
 

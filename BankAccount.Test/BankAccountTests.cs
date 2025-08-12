@@ -41,7 +41,8 @@ namespace BankAccount.Test
         {
             var action = () => sut.Deposit(-100);
 
-            action.Should().Throw<ArgumentOutOfRangeException>("Negative amounts are not allowed.");
+            action.Should().Throw<ArgumentException>()
+                           .WithMessage("Negative amounts are not allowed.");
         }
 
         [Fact]
